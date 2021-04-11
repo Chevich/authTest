@@ -10,12 +10,13 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   data$: Observable<any>;
+  
 
   constructor(
     private readonly authService: AuthService,
     private readonly dashboardService: DashboardService,
   ) {
-    this.data$ = this.dashboardService.data$;
+    this.data$ =  this.dashboardService.data$;
   }
 
   ngOnInit(): void {

@@ -1,10 +1,10 @@
 <div>
   <h1>dashboard works!</h1>
-  <a (click)="logout()">
+  <button (click)="logout()">
     LOGOUT
-  </a>
+  </button>
 </div>
 
 <div>
-  {{data$ | async | json}}
+  {{data$ | async | json}}  
 </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class DashboardService {
   }
 
   getData(listId: string): void {
-    this.http.get(
+    this.http.get<any>(
       `${ environment.basePath }/list/${ listId }`,
       {
         headers: {
@@ -23,6 +24,18 @@ export class DashboardService {
           Authorization: `Bearer ${ environment.apiToken }`,
         },
       },
-    ).subscribe(data => this.data$.next(data));
+    ).pipe(
+    tap( inf  => {
+      console.log( Object.entries(inf) );
+      for (let key in inf) {
+        // ключи
+        console.log( `${key} ` );  
+        console.log( `${inf[key]} ` );  
+        // значения ключей
+        //alert( data[key] );
+      }
+    })
+      )
+    .subscribe(data => this.data$.next(data));
   }
 }
