@@ -8,6 +8,31 @@
   </button>
 </div>
 
-<div>
-  {{data | json}}
+<div *ngIf="!!data">
+  <h2>
+    {{data.name}}
+  </h2>
+  <table *ngIf="data.results?.length">
+    <tr>
+      <th>#</th>
+      <th *ngFor="let title of keys(data.results[0])">
+        {{title}}
+      </th>
+    </tr>
+    <tr *ngFor="let row of data.results; let i=index">
+      <td>{{i + 1}}</td>
+      <ng-template
+        ngFor
+        let-j=index
+        let-column
+        [ngForOf]="keys(row)"
+      >
+        <td>
+          {{row[column] | json}}
+        </td>
+      </ng-template>
+
+    </tr>
+
+  </table>
 </div>

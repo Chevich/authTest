@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 export class DashboardComponent {
   @Input() data: any | undefined;
   @Output() notifyMe = new EventEmitter<boolean>();
+  exclude = ['overview'];
 
   constructor(
     private readonly authService: AuthService,
@@ -21,6 +22,10 @@ export class DashboardComponent {
 
   notify(): void {
     this.notifyMe.emit(true);
+  }
+
+  keys(row: any): string[] {
+    return Object.keys(row).filter(key => !this.exclude.includes(key));
   }
 
 }
