@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { DashboardContainerComponent } from './components/dashboard/dashboard.container';
 
 const routes: Routes = [
   {
@@ -12,12 +12,12 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardContainerComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'events',
-    component: DashboardComponent,
+    component: DashboardContainerComponent,
     canActivate: [AuthGuard],
   },
   {

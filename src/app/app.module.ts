@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
+import { DashboardContainerComponent } from './components/dashboard/dashboard.container';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    DashboardContainerComponent,
     LoginComponent,
   ],
   imports: [
