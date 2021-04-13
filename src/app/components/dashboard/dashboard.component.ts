@@ -28,4 +28,8 @@ export class DashboardComponent {
     return Object.keys(row).filter(key => !this.exclude.includes(key));
   }
 
+  trackByFn(index: number, result: any): string {
+    return result.id;
+  }
+
 }
