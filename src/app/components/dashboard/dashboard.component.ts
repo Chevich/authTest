@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
-  data$: Observable<any>;
-  
+export class DashboardComponent implements OnInit, OnDestroy {
+  // data$: Observable<any>;
+  data: any;
+  sub$ = new Subscription();
 
   constructor(
     private readonly authService: AuthService,
     private readonly dashboardService: DashboardService,
   ) {
-    this.data$ =  this.dashboardService.data$;
+    this.sub$.add(this.dashboardService.data$.subscribe(value => {
+      this.data = value;
+    }));
   }
 
   ngOnInit(): void {
@@ -25,6 +28,10 @@ export class DashboardComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
   }
 
 }
